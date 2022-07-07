@@ -74,16 +74,22 @@
 
             <div class="container-fluid">
                 <div class="row  bloc-3-accueil">
-                    <h2 style="color: #033386;margin-bottom: 10px;">Articles <a href="{{route('articles')}}" class="btn btn-outline-primary">Voir Tout</a></h2>
+                    <h2 style="color: #033386;margin-bottom: 10px;">Articles <a href="{{route('articles')}}" class="btn btn-outline-primary rounded">Voir Tout</a></h2>
+                    @php
+                        $count = 0;
+                    @endphp
                     @foreach($bloc_4_articles as $article)
                     <div class="col-lg-3 col-sm-12 article-4">
-                        <img style="max-height: 10rem; height:10rem; width: 100%;" class="img-fluid rounded" src="img/art4.jpg" alt="">
+                        <img style="max-height: 10rem; height:10rem; width: 100%;" class="img-fluid rounded" src="img/art{{($count%6)+1}}.jpg" alt="">
                         <h4>{{ $article["publication"]->titre }}</h4>
                         <p>
-                            {{ substr($article["article"]->description, 0, 50)."..." }} 
+                            {{ substr($article["article"]->description, 0, 40)."..." }} 
                         </p>
                         <a href="{{ route("details-article", $article["article"]->id) }}">Voir Plus</a>
                     </div>
+                    @php
+                        $count++;
+                    @endphp
                     @endforeach
                 </div>
             </div> 
@@ -93,17 +99,15 @@
                     <div class="col-sm-12 col-lg-6">
                         <h4>Alertes</h4>
                         <p class="text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Laborum quidem. 
+                            Liste des alertes lancés par les acteurs du littoral. 
                         </p>
                         <a href="{{route('alertes')}}">Voir Plus</a>
 
                         <h4 class="mt-4">Les membres de l'observatoire</h4>
                         <p class="text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Laborum quidem. 
+                            L'association des pêcheurs, ONG, associations, etc. 
                         </p>
-                        <a href="article.html">Voir Plus</a>
+                        <a href="#">Voir Plus</a>
                     </div>
                     <div class="col-sm-12 col-lg-6 rounded bloc-4-gauche">
                         <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.4413536468855!2d-17.474837185214334!3d14.687615378876147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec17347a7ddca45%3A0xe0ca3b156cde76d!2sCorniche%20Ouest!5e0!3m2!1sfr!2ssn!4v1656189860251!5m2!1sfr!2ssn" width="694" height="264" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

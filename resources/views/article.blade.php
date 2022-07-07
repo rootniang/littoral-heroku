@@ -14,10 +14,11 @@
             </p>
         </div>
         <div class="row bloc-documents mt-3 mb-3">
+            @foreach ($docs as $doc)
             <div class="col-sm-12 col-lg-2 pt-1 m-2 doc border border-primary position-relative">
                 <div class="d-flex justify-content-between">
 
-                    <img class="img-fluid w-50" src="/img/image.png" alt="">
+                    <img class="img-fluid w-50" src="/img/{{$doc->type}}.png" alt="">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             
@@ -27,95 +28,11 @@
                         </ul>
                     </div>
                 </div>
-                <p class="text-center">
-                    Image-hal.jpg
+                <p class="text-center" style="width:90%;overflow:hidden">
+                    {{substr($doc->chemin, 7)}}
                 </p>
             </div>
-            <div class="col-sm-12 col-lg-2 pt-1 m-2 doc border border-primary position-relative">
-                <div class="d-flex justify-content-between">
-
-                    <img class="img-fluid w-50" src="/img/excel.png" alt="">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" download href="#">Télécharger</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-center">
-                    Image-hal.jpg
-                </p>
-            </div>
-            <div class="col-sm-12 col-lg-2 pt-1 m-2 doc border border-primary position-relative">
-                <div class="d-flex justify-content-between">
-
-                    <img class="img-fluid w-50" src="/img/file.png" alt="">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" download href="#">Télécharger</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-center">
-                    Image-hal.jpg
-                </p>
-            </div>
-            <div class="col-sm-12 col-lg-2 pt-1 m-2 doc border border-primary position-relative">
-                <div class="d-flex justify-content-between">
-
-                    <img class="img-fluid w-50" src="/img/pdf.png" alt="">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" download href="#">Télécharger</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-center">
-                    Image-hal.jpg
-                </p>
-            </div>
-            <div class="col-sm-12 col-lg-2 pt-1 m-2 doc border border-primary position-relative">
-                <div class="d-flex justify-content-between">
-
-                    <img class="img-fluid w-50" src="/img/video.png" alt="">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" download href="#">Télécharger</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-center">
-                    Image-hal.jpg
-                </p>
-            </div>
-            <div class="col-sm-12 col-lg-2 pt-1 m-2 doc border border-primary position-relative">
-                <div class="d-flex justify-content-between">
-
-                    <img class="img-fluid w-50" src="/img/word.png" alt="">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" download href="#">Télécharger</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-center">
-                    Image-hal.jpg
-                </p>
-            </div>
+            @endforeach
         </div>
     </div>
 </x-front-layout>

@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Mail\MessageGoogle;
 use App\Models\Organisation;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -39,15 +37,6 @@ class UserController extends Controller
     public function actived(Request $request,User $user){
         $user->actifYN = 1;
         $user->save();
-        // email data
-        $email_data = array(
-            'name' =>  $user->prenom.' '.$user->nom,
-            'email' => $user->email,
-        );
-
-        // send email with the template
-        Mail::to($user)->bcc('marfadiga@gmail.com')
-                                  ->queue(new MessageGoogle($user));
         return back()->withInput();
     }
     /**

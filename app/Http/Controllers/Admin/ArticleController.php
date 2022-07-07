@@ -13,6 +13,7 @@ use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Project;
 use phpDocumentor\Reflection\ProjectFactory;
 
@@ -114,6 +115,60 @@ class ArticleController extends Controller
     }
 
     /**
+     * Get the type of a given file.
+     *
+     * @param  string  filename
+     * @return string
+     */
+    public function getFileType($filename)
+    {
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'mp4':;
+            case 'avi':
+            case 'mkv':
+                return 'video';
+            case 'jpg':;
+            case 'jpeg':;
+            case 'gif':;
+            case 'png':;
+            case 'bmp':;
+            case 'svg':;
+            case 'svgz':;
+            case 'cgm':;
+            case 'djv':;
+            case 'djvu':;
+            case 'ico':;
+            case 'ief':;
+            case'jpe':;
+            case 'pbm':;
+            case 'pgm':;
+            case 'pnm':;
+            case 'ppm':;
+            case 'ras':;
+            case 'rgb':;
+            case 'tif':;
+            case 'tiff':;
+            case 'wbmp':;
+            case 'xbm':;
+            case 'xpm':;
+            case 'xwd':
+                return 'image';
+            case 'pdf':
+                return 'pdf';
+            case 'doc':;
+            case 'docx':
+                return 'word';
+            case 'xls':;
+            case 'xlsx':
+                return 'excel';
+            default:
+                return 'file';
+        }
+    }
+    
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -130,7 +185,18 @@ class ArticleController extends Controller
             $nomCategorie = $categorie->libellle;
             $auteur = User::find($publication->iduser);
             $nomAuteur = $auteur->prenom." ".$auteur->nom;
-            return view('article', compact('article','nomCategorie','publication', 'nomAuteur'));
+            
+            $docs = DB::table('documents')
+            ->join('document_articles', 'document_articles.idDocument', '=', 'documents.id')
+            ->join('articles', 'document_articles.idArticle', '=', 'articles.id')
+            ->where('articles.id', $article->id)
+            ->get();
+
+            foreach ($docs as $doc) {
+                $doc->type = $this->getFileType($doc->chemin);
+            }
+
+            return view('article', compact('article','nomCategorie','publication', 'nomAuteur', 'docs'));
         }
         else
         {
